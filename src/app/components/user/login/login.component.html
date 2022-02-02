@@ -7,18 +7,36 @@
                     <form [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="mb-3">
                             <input formControlName="user" type="text" class="form-control form-control-lg" placeholder="Email"/>
+                            <span 
+                                class="text-danger" 
+                                *ngIf="loginForm.get('user')?.hasError('required') && loginForm.get('user')?.touched"
+                            >
+                                El email es <strong>requerido</strong>
+                            </span>
+                            <span 
+                                class="text-danger" 
+                                *ngIf="loginForm.get('user')?.hasError('email') && loginForm.get('user')?.touched"
+                            >
+                                El email es <strong>inválido</strong>
+                            </span>
                         </div>
                         <div class="mb-3">
-                            <input formControlName="pass" type="text" class="form-control form-control-lg" placeholder="Contraseña"/>
+                            <input formControlName="pass" type="password" class="form-control form-control-lg" placeholder="Contraseña"/>
+                            <span 
+                                class="text-danger" 
+                                *ngIf="loginForm.get('pass')?.hasError('required') && loginForm.get('pass')?.touched"
+                            >
+                                La contraseña es <strong>requerida</strong>
+                            </span>
                         </div>
                         <button class="btn btn-secondary btn-lg" routerLink="/">Volver</button>
-                        <button type="submit"  class="btn btn-primary btn-lg float-end">Aceptar</button>
+                        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-lg float-end">Aceptar</button>
                     </form>
                     <br>
                     <div class="text-center">
-                        <a href="#">Registrarse</a>
+                        <a routerLink="/user/register">Registrarse</a>
                         <br>
-                        <a href="#">Recuperar contraseña</a>
+                        <a routerLink="/user/recovery-pass">Recuperar contraseña</a>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recovery-pass',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecoveryPassComponent implements OnInit {
 
-  constructor() { }
+  recoveryForm: FormGroup
+
+  constructor(private fb: FormBuilder) {
+    this.recoveryForm = this.fb.group({
+      user: ['', [Validators.required, Validators.email]]
+    })
+  }
 
   ngOnInit(): void {
+  }
+
+  recoveryPass() {
+    
   }
 
 }
