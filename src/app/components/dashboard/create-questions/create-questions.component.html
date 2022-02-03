@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row mt-3 mb-5">
+        <div class="col-lg-8 offset-lg-2">
+            <form [formGroup]="questionForm" (ngSubmit)="addQuestion()">
+                <input formControlName="title" type="text" class="form-control form-control-lg input-question" placeholder="INTRODUZCA LA PREGUNTA" max="150"/>
+                <div class="row mt-5">
+                    <div class="col-lg-6 text-center">
+                        <div class="fondo-item">
+                            <p class="titulo-sec-points">SEGUNDOS</p>
+                            <p class="sec-points">{{ seg() }}</p>
+                            <div>
+                                <i (click)="sumSegundos(-1)" class="fas fa-minus sum"></i>
+                                <i (click)="sumSegundos(1)" class="fas fa-plus sum"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <div class="fondo-item">
+                            <p class="titulo-sec-points">PUNTOS</p>
+                            <p class="sec-points">{{ points() }}</p>
+                            <input formControlName="points"  type="range" class="form-range" min="0" max="2000">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <div formGroupName="response1" class="input-group">
+                            <input formControlName="title" type="text" formControlName="title"  class="form-control input-response" placeholder="Agregar respuesta 1">
+                            <div (click)="isCorrect('1')" class="input-group-text">
+                                <i [ngClass]="{'far fa-circle' : getResponseStatus('1') == false, 'fas fa-check-circle animate__animated animate__heartBeat': getResponseStatus('1') == true }"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div formGroupName="response2" class="input-group">
+                            <input formControlName="title" type="text" class="form-control input-response" placeholder="Agregar respuesta 2">
+                            <div (click)="isCorrect('2')" class="input-group-text">
+                                <i [ngClass]="{'far fa-circle' : getResponseStatus('2') == false, 'fas fa-check-circle animate__animated animate__heartBeat': getResponseStatus('2') == true }"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <div formGroupName="response3" class="input-group">
+                            <input formControlName="title" type="text" class="form-control input-response" placeholder="Agregar respuesta 3 (opcional)">
+                            <div (click)="isCorrect('3')" class="input-group-text">
+                                <i [ngClass]="{'far fa-circle' : getResponseStatus('3') == false, 'fas fa-check-circle animate__animated animate__heartBeat': getResponseStatus('3') == true }"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div formGroupName="response4" class="input-group">
+                            <input formControlName="title" type="text" class="form-control input-response" placeholder="Agregar respuesta 4 (opcional)">
+                            <div (click)="isCorrect('4')" class="input-group-text">
+                                <i [ngClass]="{'far fa-circle' : getResponseStatus('4') == false, 'fas fa-check-circle animate__animated animate__heartBeat': getResponseStatus('4') == true }"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="clo-12 text-center">
+                        <button type="submit" class="btn-principal">AGREGAR PREGUNTA</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
