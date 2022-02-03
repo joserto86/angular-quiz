@@ -1,1 +1,33 @@
-<p>list-questions works!</p>
+<div class="row-mt-3" *ngIf="questionList.length > 0">
+    <div class="col-lg-8 offset-lg-2">
+        <div class="card mb-3" *ngFor="let question of questionList">
+            <div class="card-body text-center">
+                <p class="titulo-pregunta">{{ question.title }}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <p><span class="badge bg-dark">{{ question.seconds }}s</span></p>
+                    </div>
+                    <div class="col-6">
+                        <p><span class="badge bg-dark">{{ question.points }}pts</span></p>
+                    </div>
+                </div>
+
+                <ul class="list-group">
+                    <li *ngFor="let response of question.responses" class="list-group-item"
+                        [ngClass]="{'correct': response.isCorrect == true}"
+                    >
+                        {{ response.description }}
+                    </li>
+                </ul>
+                <div>
+                    <i class="fas fa-trash"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-12 text-center">
+                <button style="width: 100%; font-size:20px" class="btn-principal">FINALIZAR CUESTIONARIO</button>
+            </div>
+        </div>
+    </div>
+</div>
