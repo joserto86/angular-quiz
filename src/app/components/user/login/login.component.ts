@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/interfaces/user';
 import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
@@ -43,7 +44,8 @@ export class LoginComponent implements OnInit {
       if (response.user?.emailVerified == false) {
         this.router.navigate(['/user/verify-email']);
       } else {
-        
+        this.router.navigate(['/dashboard']);
+        this.setLocalStorage(response.user)
       }
 
     }, error => {
@@ -51,5 +53,14 @@ export class LoginComponent implements OnInit {
       this.toastr.error(this.errorService.error(error.code), 'Error');
       this.loginForm.reset();
     });
+  }
+
+  setLocalStorage(user: any) {
+    const localUser:User = {
+      uid: user.uid,
+      email: user.email
+    }
+
+    localStorage.setItem('user', JSON.stringify(localUser));
   }
 }
