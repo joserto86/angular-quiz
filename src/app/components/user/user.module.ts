@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { RecoveryPassComponent } from './recovery-pass/recovery-pass.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { SharedModule } from '../shared/shared.module';
+import { ErrorService } from 'src/app/services/error.service';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     SharedModule,
     UserRoutingModule
-  ]
+  ],
+  providers: [ErrorService]
 })
 export class UserModule { }
