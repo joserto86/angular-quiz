@@ -54,7 +54,7 @@ export class ListQuestionsComponent implements OnInit {
       this.toastr.success('Cuestionario creado exitosamente', 'Nuevo cuestionario registrado');
       this.router.navigate(['/dashboard']);
     }).catch(error => {
-      console.log(error.message);
+      console.log(error);
       this.loading = false;
     })
   }

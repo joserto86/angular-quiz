@@ -1,27 +1,73 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Quiz } from 'src/app/models/quiz';
+import { ResponseQuizService } from 'src/app/services/response-quiz.service';
 
 @Component({
   selector: 'app-init',
   templateUrl: './init.component.html',
   styleUrls: ['./init.component.css']
 })
-export class InitComponent implements OnInit {
+export class InitComponent implements OnInit, OnDestroy {
 
   error: boolean = false;
   pin: string = '';
+  errorText: string = '';
+  loading:boolean = false;
+  subscriptionCode: Subscription = new Subscription();
 
-  constructor() { }
+  constructor(private responseQuiz: ResponseQuizService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  ingresar() {
-    if (!this.pin) {
-      this.error = true;
+  ngOnDestroy(): void {
+      this.subscriptionCode.unsubscribe();
+  }
 
-      setTimeout(() => {
-        this.error = false
-      }, 3000);
+  ingresar() {
+    console.log('here');
+    if (!this.pin) {
+      this.errorMessage('Por favor, introduzca un pin');
+      return;
     }
+
+    this.loading = true;
+    this.subscriptionCode = this.responseQuiz.searchByCode(this.pin).subscribe(data => {
+      if (data.empty) {
+        this.errorMessage('El pin no es correcto');
+        this.loading = false;
+      } else {
+        data.forEach((element:any) => {
+          const quiz: Quiz = {
+            id: element.id,
+            ...element.data()
+          }
+
+          console.log(quiz);
+
+          this.responseQuiz.currentQuiz = quiz;
+          this.router.navigate(['/']);
+          
+        });
+
+
+      }
+    }, error => {
+      console.log(error);
+      this.errorMessage(error.message)
+      this.loading = false;
+    })
+  }
+
+  errorMessage(text:string) {
+    this.errorText = text;
+    this.error = true;
+    this.pin = '';
+
+    setTimeout(() => {
+      this.error = false
+    }, 4000);
   }
 }

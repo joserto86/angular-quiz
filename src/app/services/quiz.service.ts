@@ -13,11 +13,11 @@ export class QuizService {
   quizTitle: string = '';
   quizDesc: string = '';
 
-  quizCollection: AngularFirestoreCollection<Quiz>;
+  // quizCollection: AngularFirestoreCollection<Quiz>;
   private question$ = new Subject<Question>();
 
   constructor(private db: AngularFirestore) {
-    this.quizCollection = this.db.collection('quizz');
+    // this.quizCollection = this.db.collection('quizz');
   }
 
   addQuestion(question: Question) {
@@ -39,7 +39,7 @@ export class QuizService {
       questions: quizz.questions
     }
     
-    return this.quizCollection.add(object);
+    return this.db.collection('quizz').add(object);
   }
 
   getQuizzByUserUid(uid:string) {
@@ -50,10 +50,10 @@ export class QuizService {
   }
 
   removeQuiz(id:string): Promise<any> {
-    return this.quizCollection.doc(id).delete();
+    return this.db.collection('quizz').doc(id).delete();
   }
 
   getQuiz(id: string): Observable<any>{
-    return this.quizCollection.doc(id).get();
+    return this.db.collection('quizz').doc(id).get();
   }
 } 
