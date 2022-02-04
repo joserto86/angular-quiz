@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, Subject } from 'rxjs';
 import { Question } from '../models/question';
+import { Quiz } from '../models/quiz';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class QuizService {
 
   private question$ = new Subject<Question>();
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) { }
 
   addQuestion(question: Question) {
     this.question$.next(question);
@@ -20,5 +22,10 @@ export class QuizService {
 
   getQuestions():Observable<Question> {
     return this.question$.asObservable();
+  }
+
+  createQuiz(quizz: Quiz): Promise<any> {
+    this.firestore.collection('quizz').add(quizz);
+    return;
   }
 }

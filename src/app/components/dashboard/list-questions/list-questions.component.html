@@ -1,6 +1,10 @@
-<div class="row-mt-3" *ngIf="questionList.length > 0">
+<div class="d-flex justify-content-center mt-5" *ngIf="loading" >
+    <app-spinner></app-spinner>
+</div>
+
+<div class="row-mt-3" *ngIf="questionList.length > 0 && !loading">
     <div class="col-lg-8 offset-lg-2">
-        <div class="card mb-3" *ngFor="let question of questionList">
+        <div class="card mb-3" *ngFor="let question of questionList; let i = index">
             <div class="card-body text-center">
                 <p class="titulo-pregunta">{{ question.title }}</p>
                 <div class="row">
@@ -20,13 +24,13 @@
                     </li>
                 </ul>
                 <div>
-                    <i class="fas fa-trash"></i>
+                    <i (click)="removeQuestion(i)" class="fas fa-trash"></i>
                 </div>
             </div>
         </div>
         <div class="row mt-3 mb-3">
             <div class="col-12 text-center">
-                <button style="width: 100%; font-size:20px" class="btn-principal">FINALIZAR CUESTIONARIO</button>
+                <button (click)="finishQuiz()" style="width: 100%; font-size:20px" class="btn-principal">FINALIZAR CUESTIONARIO</button>
             </div>
         </div>
     </div>
