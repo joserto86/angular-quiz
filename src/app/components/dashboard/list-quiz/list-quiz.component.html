@@ -2,7 +2,11 @@
     <button routerLink="/dashboard/create-quiz" class="btn-principal btn-quiz">NUEVO</button>
 </div>
 
-<div class="container">
+<div class="d-flex justify-content-center mt-3" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+
+<div class="container" *ngIf="quizList.length > 0 && !this.loading">
     <div class="row mt-3">
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
@@ -17,14 +21,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Mundial Futbol</td>
-                                <td>10</td>
-                                <td><span class="badge bg-black">dfasdf</span></td>
+                            <tr *ngFor="let quiz of quizList; let i = index">
+                                <td>{{ quiz.title }}</td>
+                                <td>{{ quiz.countQuestions }}</td>
+                                <td><span class="badge bg-black">{{ quiz.code }}</span></td>
                                 <td>
-                                    <i class="fas fa-search"></i>
+                                    <i [routerLink]="['/dashboard/show-quiz', quiz.id]" class="fas fa-search"></i>
                                     <i class="fas fa-chart-line"></i>
-                                    <i class="fas fa-trash"></i>
+                                    <i (click)="removeQuiz(quiz.id!)" class="fas fa-trash"></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -34,5 +38,18 @@
         </div>
     </div>
 </div>
+
+<div class="container" *ngIf="quizList.length == 0 && !loading">
+    <div class="row mt-3">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>No hay cuestionarios!</h5>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
 
 

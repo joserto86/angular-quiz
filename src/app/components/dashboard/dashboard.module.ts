@@ -9,6 +9,7 @@ import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import { SharedModule } from '../shared/shared.module';
 import { CreateQuestionsComponent } from './create-questions/create-questions.component';
 import { ListQuestionsComponent } from './list-questions/list-questions.component';
+import { ShowQuizComponent } from './show-quiz/show-quiz.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ListQuestionsComponent } from './list-questions/list-questions.componen
     ListQuizComponent,
     CreateQuizComponent,
     CreateQuestionsComponent,
-    ListQuestionsComponent
+    ListQuestionsComponent,
+    ShowQuizComponent
   ],
   imports: [
     CommonModule,

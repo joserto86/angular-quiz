@@ -1,7 +1,7 @@
 import { Question } from "./question";
 
 export class Quiz {
-    id?: number;
+    id?: string;
     uid: string;
     title: string;
     description: string;

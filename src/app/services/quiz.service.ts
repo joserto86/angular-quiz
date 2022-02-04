@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable, Subject } from 'rxjs';
 import { Question } from '../models/question';
 import { Quiz } from '../models/quiz';
@@ -12,9 +13,12 @@ export class QuizService {
   quizTitle: string = '';
   quizDesc: string = '';
 
+  quizCollection: AngularFirestoreCollection<Quiz>;
   private question$ = new Subject<Question>();
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {
+    this.quizCollection = this.db.collection('quizz');
+  }
 
   addQuestion(question: Question) {
     this.question$.next(question);
@@ -25,7 +29,31 @@ export class QuizService {
   }
 
   createQuiz(quizz: Quiz): Promise<any> {
-    this.firestore.collection('quizz').add(quizz);
-    return;
+    const object:Quiz = {
+      uid: quizz.uid,
+      title: quizz.title,
+      description: quizz.description,
+      code: quizz.code,
+      countQuestions: quizz.countQuestions,
+      createdAt: quizz.createdAt,
+      questions: quizz.questions
+    }
+    
+    return this.quizCollection.add(object);
   }
-}
+
+  getQuizzByUserUid(uid:string) {
+    return this.db.collection('quizz', ref => ref.where('uid', '==', uid)).snapshotChanges();
+
+    // let quizList = this.quizCollection.ref.where('uid', '==', uid);
+    // quizList.firestore.collection.s
+  }
+
+  removeQuiz(id:string): Promise<any> {
+    return this.quizCollection.doc(id).delete();
+  }
+
+  getQuiz(id: string): Observable<any>{
+    return this.quizCollection.doc(id).get();
+  }
+} 

@@ -2,7 +2,7 @@
     <app-spinner></app-spinner>
 </div>
 
-<div class="row-mt-3" *ngIf="questionList.length > 0 && !loading">
+<div class="row mt-3 mb-3" *ngIf="questionList.length > 0 && !loading">
     <div class="col-lg-8 offset-lg-2">
         <div class="card mb-3" *ngFor="let question of questionList; let i = index">
             <div class="card-body text-center">

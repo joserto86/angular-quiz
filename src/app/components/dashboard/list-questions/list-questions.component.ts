@@ -48,8 +48,6 @@ export class ListQuestionsComponent implements OnInit {
       this.questionList
     );
 
-    console.log(quiz);
-
     this.loading = true;
 
     this.quizService.createQuiz(quiz).then(data => {
