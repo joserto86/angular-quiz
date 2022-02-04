@@ -14,6 +14,10 @@ const routes: Routes = [
       .then(m => m.DashboardModule) 
   },
 
+  { path: 'play', loadChildren: () => import('./components/play/play.module')
+      .then(m => m.PlayModule) 
+  },
+
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 
 ];

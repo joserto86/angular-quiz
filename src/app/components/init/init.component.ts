@@ -48,10 +48,9 @@ export class InitComponent implements OnInit, OnDestroy {
           console.log(quiz);
 
           this.responseQuiz.currentQuiz = quiz;
-          this.router.navigate(['/']);
+          this.router.navigate(['/play']);
           
         });
-
 
       }
     }, error => {
