@@ -1,1 +1,9 @@
-<p>new-player works!</p>
+<div class="container">
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+        <strong>{{ errorText }}</strong>
+      </div>
+    <input [(ngModel)]="name" type="text" class="form-control input-aceptar mb-3" placeholder="Introduzca su nombre"/>
+    <button (click)="insertName()" class="btn-principal btn-aceptar">Aceptar</button>
+</div>
+
+

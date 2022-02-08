@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.input-aceptar {
+    width: 300px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    height: 3.125rem;
+    font-size: 1.25rem;
+}
+
+.btn-aceptar {
+    width: 300px;
+}

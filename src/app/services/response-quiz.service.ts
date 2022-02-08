@@ -9,6 +9,7 @@ import { Quiz } from '../models/quiz';
 export class ResponseQuizService {
 
   currentQuiz: Quiz | undefined;
+  playerName: string = '';
 
   constructor(private firestore: AngularFirestore) { }
 
