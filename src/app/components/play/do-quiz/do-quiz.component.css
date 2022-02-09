@@ -10,11 +10,18 @@
 }
 
 .selected {
-    background-color: #1312d2;
+    background-color: #131d2d;
     color: white;
 }
 
 .btn-aceptar {
     width: 100%;
     font-size: 20px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+
+
+.btn-aceptar:hover {
+    color: white;
 }

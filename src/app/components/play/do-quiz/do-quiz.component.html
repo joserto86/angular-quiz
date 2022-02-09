@@ -4,14 +4,19 @@
     </div>
     <div class="row mt-2">
         <div class="text-center">
-            <h3 class="titulo">{{ getTitle() }}</h3>
+            <h3 class="titulo">{{ getQuestionTitle() }}</h3>
             <div class="col-lg-6 offset-lg-3">
                 <ul class="list-group mt-3">
-                    <li *ngFor="let response of getResponses()" 
+                    <li *ngFor="let response of getQuestionResponses(); let i = index" 
                         class="list-group-item animate__animated animate__fadeIn"
+                        (click)="selectedResponse(response, i)"
+                        [ngClass]="addClassOption(response)"
                     >{{ response.description }}</li>
                 </ul>
-                <button class="btn-principal mt-3 btn-aceptar">ACEPTAR</button>
+                <button [disabled]="!optionSelected" 
+                    class="btn btn-principal mt-3 btn-aceptar"
+                    (click)="nextQuestion()"
+                >ACEPTAR</button>
             </div>
         </div>
     </div>
