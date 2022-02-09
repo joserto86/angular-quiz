@@ -1,0 +1,20 @@
+.count-question {
+    font-size: 5rem;
+}
+
+.list-group-item {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    color: black;
+}
+
+.selected {
+    background-color: #1312d2;
+    color: white;
+}
+
+.btn-aceptar {
+    width: 100%;
+    font-size: 20px;
+}

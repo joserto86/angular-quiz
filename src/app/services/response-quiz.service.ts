@@ -8,7 +8,7 @@ import { Quiz } from '../models/quiz';
 })
 export class ResponseQuizService {
 
-  currentQuiz: Quiz | undefined;
+  currentQuiz!: Quiz;
   playerName: string = '';
 
   constructor(private firestore: AngularFirestore) { }
@@ -16,4 +16,6 @@ export class ResponseQuizService {
   searchByCode(code: string): Observable<any> {
     return this.firestore.collection('quizz', ref => ref.where('code', '==', code)).get();
   }
+
+
 }
