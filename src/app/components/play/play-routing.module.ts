@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: NewPlayerComponent },
   { path: 'init-count', component: InitialCounterComponent },
   { path: 'do-quiz', component: DoQuizComponent },
-  { path: 'user-response', component: UserResponseComponent },
+  { path: 'user-response/:id', component: UserResponseComponent },
 ];
 
 @NgModule({

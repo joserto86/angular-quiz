@@ -17,5 +17,12 @@ export class ResponseQuizService {
     return this.firestore.collection('quizz', ref => ref.where('code', '==', code)).get();
   }
 
+  setUserResponse(userResponse:any):Promise<any> {
+    return this.firestore.collection('responses').add(userResponse);
+  }
+
+  getUserResponse(index:string) :Observable<any> {
+    return this.firestore.collection('respones').doc(index).get();
+  }
 
 }

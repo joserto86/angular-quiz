@@ -11,6 +11,8 @@ import { ResponseQuizService } from 'src/app/services/response-quiz.service';
 })
 export class DoQuizComponent implements OnInit, OnDestroy {
 
+  loading:boolean = false;
+
   quiz!: Quiz;
   player:string = '';
   questionIndex:number = 0;
@@ -104,7 +106,7 @@ export class DoQuizComponent implements OnInit, OnDestroy {
       title: this.getQuestionTitle(),
       points: this.getCurrentQuestionPoints(),
       seconds: this.getCurrentQuestionSeconds(),
-      indexResponse: this.getSelectedIndex,
+      indexResponse: this.getSelectedIndex(),
       reponses: this.getQuestionResponses()
     }
 
@@ -115,7 +117,6 @@ export class DoQuizComponent implements OnInit, OnDestroy {
 
     if (this.quiz.questions.length - 1 === this.questionIndex) {
       this.saveUserResponses();
-      this.router.navigate(['/play/user-response']);
     } else {
       this.questionIndex ++;
       this.seconds = this.getQuestionSeconds();
@@ -161,7 +162,7 @@ export class DoQuizComponent implements OnInit, OnDestroy {
   }
 
   private saveUserResponses() {
-    const userQuizResponses = {
+    const userQuizResponses:any = {
       idQuiz: this.quiz.id,
       name: this.player,
       date: new Date(),
@@ -171,6 +172,16 @@ export class DoQuizComponent implements OnInit, OnDestroy {
       totalPoints: this.totalPoints,
       userResponses: this.userResponses,
     }
+
+    this.loading = true;
+    
+    this.responseQuizService.setUserResponse(userQuizResponses).then(data => {
+      this.router.navigate(['/play/user-response', data.id]);
+    }, error => {
+      console.log(error);
+      this.router.navigate(['/']);
+    })
+
   }
 
 }

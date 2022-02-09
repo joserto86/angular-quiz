@@ -1,4 +1,8 @@
-<div class="container mt-3">
+<div class="contenedor" *ngIf="loading"> 
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!this.loading" class="container mt-3">
     <div class="d-flex justify-content-center mt-3">
         <h1 class="titulo count-question">{{ getSeconds() }}</h1>
     </div>

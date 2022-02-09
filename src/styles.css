@@ -21,3 +21,11 @@ body {
 .card-titulo {
     padding: 0 22px;
 }
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
