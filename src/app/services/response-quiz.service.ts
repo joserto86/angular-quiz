@@ -25,4 +25,12 @@ export class ResponseQuizService {
     return this.firestore.collection('responses').doc(index).get();
   }
 
+  getResponsesByQuizzId(index:string) :Observable<any> {
+    return this.firestore.collection('responses', ref => ref.where('idQuiz', '==', index)).snapshotChanges();
+  }
+
+  deleteUserResponse(id: string) :Promise<any> {
+    return this.firestore.collection('responses').doc(id).delete();
+  }
+
 }

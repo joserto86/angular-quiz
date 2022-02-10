@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center mt-3" *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+
+<div class="container" *ngIf="!loading">
+    <div class="d-flex justify-content-center mt-3">
+        <div class="card card-titulo">
+            <div class="card-body text-center">
+                <h2 class="titulo">LISTADO DE RESPUESTAS</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3" *ngIf="userResponses.length > 0" >
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Participante</th>
+                                <th>Fecha</th>
+                                <th>Puntos</th>
+                                <th style="width: 20%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let userResponse of userResponses; let i = index">
+                                <td>{{ userResponse.name }}</td>
+                                <td>{{ userResponse.date.toDate() | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ userResponse.totalPoints }}</td>
+                                <td>
+                                    <i [routerLink]="['/dashboard/response', userResponse.id]" class="fas fa-search"></i>
+                                    <i (click)="removeUserResponse(userResponse.id)" class="fas fa-trash"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3" *ngIf="userResponses.length == 0" >
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>No hay respuestas para mostrar</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <button routerLink="/dashboard" style="width: 100%;" class="btn-principal mt-3 mb-3">VOLVER</button>
+        </div>
+    </div>
+</div>

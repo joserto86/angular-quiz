@@ -13,11 +13,14 @@ export class UserResponseComponent implements OnInit {
   loading:boolean = false;
 
   userQuizResponse:any;
+  previousRoute:string = '';
 
   constructor(private responseQuizService: ResponseQuizService, 
               private route: ActivatedRoute,
               private router: Router
-  ) { }
+  ) {
+    this.previousRoute = this.route.snapshot.url[0].path;
+   }
 
   ngOnInit(): void {
     this.loading = true;
@@ -43,7 +46,11 @@ export class UserResponseComponent implements OnInit {
   }
 
   backReturn() {
-    this.router.navigate(['/']);
+    if (this.previousRoute === 'response') {
+      this.router.navigate(['/dashboard/statistics', this.userQuizResponse.idQuiz]);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
 }
