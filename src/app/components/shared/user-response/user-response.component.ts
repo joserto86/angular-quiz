@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ResponseQuizService } from 'src/app/services/response-quiz.service';
 
 @Component({
@@ -12,7 +12,12 @@ export class UserResponseComponent implements OnInit {
   id:string = '';
   loading:boolean = false;
 
-  constructor(private responseQuizService: ResponseQuizService, private route: ActivatedRoute) { }
+  userQuizResponse:any;
+
+  constructor(private responseQuizService: ResponseQuizService, 
+              private route: ActivatedRoute,
+              private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -23,10 +28,22 @@ export class UserResponseComponent implements OnInit {
   getUserResponses() {
     this.responseQuizService.getUserResponse(this.id).subscribe(doc => {
       this.loading = false;
+
+      if (!doc.exists) {
+        this.backReturn();
+        return;
+      }
+
+      this.userQuizResponse = doc.data();
+      console.log(doc.data());
     }, error => {
       console.log(error);
       this.loading = false;
     })
+  }
+
+  backReturn() {
+    this.router.navigate(['/']);
   }
 
 }

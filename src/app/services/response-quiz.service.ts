@@ -22,7 +22,7 @@ export class ResponseQuizService {
   }
 
   getUserResponse(index:string) :Observable<any> {
-    return this.firestore.collection('respones').doc(index).get();
+    return this.firestore.collection('responses').doc(index).get();
   }
 
 }

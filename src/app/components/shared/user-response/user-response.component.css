@@ -1,0 +1,16 @@
+.list-group-item {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    text-align: center;
+}
+
+.correct {
+    background-color: #198754;
+    color: white;
+}
+
+.incorrect {
+    background-color: #dc3545;
+    color: white;
+}
