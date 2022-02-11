@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "quizz-c15d6": {
+      "hosting": {
+        "angular-quiz": [
+          "quizz-c15d6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "quizz-c15d6"
+  }
+}
